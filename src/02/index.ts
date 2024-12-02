@@ -40,10 +40,6 @@ export function determineSafetyWithProblemDampener(
   reactorData: number[][],
 ): number {
   return reactorData.map((report) => {
-    if (isReportSafe(report)) {
-      return true;
-    }
-
     for (let i = 0; i < report.length; i++) {
       const dampenedReport = report.toSpliced(i, 1);
       if (isReportSafe(dampenedReport)) {
@@ -59,7 +55,7 @@ interface Puzzle2Input {
   reactorData: number[][];
 }
 
-function parseInput(path: string): Puzzle2Input {
+export function parseInput(path: string): Puzzle2Input {
   const file = Deno.readTextFileSync(path);
 
   const reactorData: number[][] = file.split("\n").map((line) =>
